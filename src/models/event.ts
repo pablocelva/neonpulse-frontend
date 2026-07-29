@@ -14,4 +14,6 @@ export interface Event {
     date: Date;
     time: string;
     status: EventStatus;
+    imageUrl?: string;
+    isFeatured?: boolean;
 }
