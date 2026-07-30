@@ -1,0 +1,66 @@
+[
+    {
+        "id": "1",
+        "title": "Latam Tour 2026",
+        "artist": "Elena Pinderhughes",
+        "date": "10-10-2026",
+        "time": "20:00",
+        "status": "SCHEDULED",
+        "imageUrl": "/images/elena.webp",
+        "isFeatured": true
+    },
+    {
+        "id": "2",
+        "title": "Latam Tour 2026",
+        "artist": "Braxton Cook",
+        "date": "10-11-2026",
+        "time": "19:00",
+        "status": "SCHEDULED",
+        "imageUrl": "/images/braxton.webp"
+    },
+    {
+        "id": "3",
+        "title": "Latam Tour 2026",
+        "artist": "Louis Cole",
+        "date": "11-12-2026",
+        "time": "21:00",
+        "status": "SCHEDULED",
+        "imageUrl": "/images/louis.jpg"
+    },
+    {
+        "id": "4",
+        "title": "Latam Tour 2026",
+        "artist": "Genevieve  Artadi",
+        "date": "12-14-2026",
+        "time": "21:00",
+        "status": "SCHEDULED",
+        "imageUrl": "/images/genevieve.jfif"
+    },
+    {
+        "id": "5",
+        "title": "Latam Tour 2026",
+        "artist": "Terrace Martin",
+        "date": "12-16-2026",
+        "time": "21:00",
+        "status": "SCHEDULED",
+        "imageUrl": "/images/terrace.jpg"
+    },
+    {
+        "id": "6",
+        "title": "Latam Tour 2026",
+        "artist": "Jazmin Sullivan",
+        "date": "12-22-2026",
+        "time": "21:00",
+        "status": "SCHEDULED",
+        "imageUrl": "/images/jazmin.jfif"
+    },
+    {
+        "id": "7",
+        "title": "Latam Tour 2026",
+        "artist": "The Internet",
+        "date": "12-23-2026",
+        "time": "21:00",
+        "status": "SCHEDULED",
+        "imageUrl": "/images/internet.jfif"
+    }
+]

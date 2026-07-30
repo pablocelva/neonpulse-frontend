@@ -12,7 +12,7 @@ export interface Event {
     title: string;
     artist: string;
     date: Date;
-    time: string;
+    time?: string;
     status: EventStatus;
     imageUrl?: string;
     isFeatured?: boolean;
