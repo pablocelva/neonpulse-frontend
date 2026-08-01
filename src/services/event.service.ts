@@ -40,7 +40,7 @@ export class EventService {
     return rawData.map((item: any): Event => ({
       id: String(item.id),
       title: String(item.title || 'Evento sin título'),
-      artist: String(item.band || 'Artista desconocido'),
+      artist: String(item.artist || 'Artista desconocido'),
       date: item.date ? new Date(item.date) : new Date(),
       time: item.time ? String(item.time) : undefined,
       status: (Object.values(EventStatus).includes(item.status as EventStatus)

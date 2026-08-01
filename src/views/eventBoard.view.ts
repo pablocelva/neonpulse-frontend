@@ -10,6 +10,7 @@ import {
   createErrorStateElement,
   createEmptyStateElement,
 } from '../components/StateViews/StateViews';
+import { renderBookingForm } from '../components/BookingForm';
 
 export class EventBoardView {
   private bannerContainer: HTMLElement | null;
@@ -94,6 +95,7 @@ export class EventBoardView {
     this.carteleraContainer.replaceChildren(fragment);
   }
 
+  // Agregar formulario
   /**
    * Muestra la vista de estado vacío cuando no hay conciertos.
    */

@@ -1,7 +1,8 @@
 import type { Event } from '../../models';
 import { EventStatus } from '../../models';
+import { renderIcon } from '../../utils/icon.utils';
+import { formatDate } from '../../utils/date.utils';
 import {
-  createElement,
   Music,
   Calendar,
   Clock,
@@ -11,44 +12,6 @@ import {
   XCircle,
   AlertTriangle,
 } from 'lucide';
-
-/**
- * Convierte una definición de icono Lucide a una cadena SVG limpia de forma segura.
- */
-function renderIcon(
-  iconDef: Parameters<typeof createElement>[0],
-  extraClass: string = '',
-): string {
-  try {
-    if (!iconDef) return '';
-    const iconEl = createElement(iconDef);
-    if (extraClass) {
-      iconEl.classList.add(...extraClass.split(' '));
-    }
-    return iconEl.outerHTML;
-  } catch (error) {
-    console.warn('[NeonPulse] Error al renderizar icono:', error);
-    return '';
-  }
-}
-
-/**
- * Formatea una fecha a una cadena legible en español.
- */
-function formatDate(date?: Date): string {
-  if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
-    return 'Fecha por confirmar';
-  }
-  try {
-    return date.toLocaleDateString('es-ES', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
-  } catch {
-    return 'Fecha por confirmar';
-  }
-}
 
 /**
  * Obtiene la configuración del badge y botón según el estado del concierto con botones rockeros de alto contraste.
@@ -119,7 +82,7 @@ export function generateEventCardHtml(event: Event): string {
   const formattedDate = formatDate(event.date);
   const timeDisplay = event.time ? `${event.time} hrs` : 'Por confirmar';
   const title = event.title || 'Concierto sin título';
-  const band = event.artist || 'Artista por confirmar';
+  const artist = event.artist || 'Artista por confirmar';
   const id = event.id || 'desconocido';
   const imageUrl = event.imageUrl || '/images/punk1.png';
 
@@ -151,7 +114,7 @@ export function generateEventCardHtml(event: Event): string {
           </h3>
           <div class="flex items-center gap-1.5 text-red-500 font-extrabold text-xs tracking-wider">
             ${renderIcon(Music, 'w-3.5 h-3.5 shrink-0 text-red-500')}
-            <span>${band}</span>
+            <span>${artist}</span>
           </div>
         </header>
 
@@ -183,7 +146,6 @@ export function generateEventCardHtml(event: Event): string {
 
 /**
  * Crea e instancia un nodo HTMLElement seguro para la tarjeta del concierto.
- * Retorna un fallback UI elegante si ocurre cualquier falla durante el renderizado.
  */
 export function createEventCardElement(event: Event): HTMLElement {
   try {
@@ -197,11 +159,13 @@ export function createEventCardElement(event: Event): HTMLElement {
 
     return element;
   } catch (error) {
-    console.error(`[NeonPulse] Error al crear la tarjeta del concierto (${event?.id || 'desconocido'}):`, error);
+    let eventId = 'desconocido';
+    try { eventId = String(event?.id ?? 'desconocido'); } catch { /* id getter también lanzó */ }
+    console.error(`[NeonPulse] Error al crear la tarjeta del concierto (${eventId}):`, error);
 
-    // Componente Fallback UI de error individual
     const fallbackArticle = document.createElement('article');
-    fallbackArticle.className = 'h-full bg-zinc-950 border border-red-600/40 rounded-xl p-4 text-center text-red-400 flex flex-col justify-center items-center gap-2';
+    fallbackArticle.className = 
+      'h-full bg-zinc-950 border border-red-600/40 rounded-xl p-4 text-center text-red-400 flex flex-col justify-center items-center gap-2';
     
     const icon = renderIcon(AlertTriangle, 'w-5 h-5 text-red-400');
     fallbackArticle.innerHTML = `
