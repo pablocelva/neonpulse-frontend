@@ -99,4 +99,23 @@ describe('EventCard Component', () => {
     expect(fallbackEl).toBeInstanceOf(HTMLElement);
     expect(fallbackEl.innerHTML).toContain('No se pudo cargar esta tocata.');
   });
+  
+  it('debe retornar fallback UI si createConcertCardElement lanza un error por elemento nulo generado', () => {
+    const originalCreateElement = document.createElement.bind(document);
+    const createElementSpy = vi.spyOn(document, 'createElement').mockImplementation((tagName) => {
+      if (tagName === 'div') {
+        const div = originalCreateElement('div');
+        Object.defineProperty(div, 'firstElementChild', {
+          get: () => null,
+          configurable: true
+        });
+        return div;
+      }
+      return originalCreateElement(tagName);
+    });
+    const fallbackEl = createEventCardElement(baseEvent);
+    expect(fallbackEl).toBeInstanceOf(HTMLElement);
+    expect(fallbackEl.innerHTML).toContain('No se pudo cargar esta tocata.');
+    createElementSpy.mockRestore();
+  });
 });

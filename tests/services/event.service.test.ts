@@ -27,6 +27,10 @@ describe('EventService', () => {
       title: 'Underground Jam',
       status: 'INVALID_STATUS',
     },
+    {
+      id: '4',
+      status: 'SCHEDULED',
+    },
   ];
 
   beforeEach(() => {
@@ -45,7 +49,7 @@ describe('EventService', () => {
 
     const events = await EventService.getAllEvents(0);
 
-    expect(events).toHaveLength(3);
+    expect(events).toHaveLength(4);
     expect(events[0].id).toBe('1');
     expect(events[0].title).toBe('Braxton Cook Latam Tour');
     expect(events[0].artist).toBe('Braxton Cook');
@@ -59,6 +63,9 @@ describe('EventService', () => {
     expect(events[2].time).toBeUndefined();
     expect(events[2].status).toBe(EventStatus.SCHEDULED);
     expect(events[2].imageUrl).toBeUndefined();
+    
+    expect(events[3].title).toBe('Evento sin título');
+    expect(events[3].artist).toBe('Artista desconocido');
   });
 
   it('debe aplicar retardo simulado cuando delayMs > 0', async () => {
